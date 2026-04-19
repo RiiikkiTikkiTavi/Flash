@@ -25,7 +25,52 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return const LearningScreen();
+    return const SetListWidget();
+  }
+}
+
+class SetListWidget extends StatelessWidget {
+  const SetListWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('Flashcards'),
+      ),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        shrinkWrap: true,
+        itemCount: 40,
+        itemBuilder: (context, index) {
+          return const SetNameWidget(name: 'Set of cards');
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class SetNameWidget extends StatelessWidget {
+  const SetNameWidget({super.key, required this.name});
+
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      surfaceTintColor: Colors.blueGrey,
+      elevation: 4,
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(name, style: const TextStyle(fontSize: 24)),
+      ),
+    );
   }
 }
 
