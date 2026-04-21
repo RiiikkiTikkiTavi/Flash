@@ -2,27 +2,28 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const FlashApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class FlashApp extends StatefulWidget {
+  const FlashApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<FlashApp> createState() => _FlashAppState();
+}
+
+class _FlashAppState extends State<FlashApp> {
+final _router = AppRouter();
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: MyHomePage());
+    return const MaterialApp.router(home: CardListScreen(), routerConfig: ,);
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class CardListScreen extends StatelessWidget {
+  const CardListScreen({super.key});
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final nameController = TextEditingController();
@@ -155,8 +156,8 @@ class HeaderSetWidget extends StatelessWidget {
   }
 }
 
-class SetListWidget extends StatelessWidget {
-  const SetListWidget({super.key});
+class SetListScreen extends StatelessWidget {
+  const SetListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
