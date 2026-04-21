@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flash/router/router.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
 
 void main() {
   runApp(const FlashApp());
@@ -15,12 +14,10 @@ class FlashApp extends StatefulWidget {
 }
 
 class _FlashAppState extends State<FlashApp> {
-final _router = AppRouter();
+  final _router = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(home: , routerConfig: ,);
+    return MaterialApp.router(routerConfig: _router.config());
   }
 }
-
-

@@ -14,12 +14,20 @@ class CardListScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const SliverAppBar(
+          SliverAppBar(
             snap: true,
             floating: true,
-            title: Text('Набор карточек'),
+            title: const Text('Набор карточек'),
             elevation: 0,
             surfaceTintColor: Colors.transparent,
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.done),
+                onPressed: () {
+                  context.router.pop();
+                },
+              ),
+            ],
           ),
           HeaderSetWidget(
             nameController: nameController,

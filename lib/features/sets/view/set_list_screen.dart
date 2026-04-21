@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flash/router/router.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -17,19 +18,26 @@ class SetListScreen extends StatelessWidget {
         shrinkWrap: true,
         itemCount: 40,
         itemBuilder: (context, index) {
-          return const SetNameWidget(name: 'Set of cards');
+          return GestureDetector(
+            child: const SetWidget(name: 'Set of cards'),
+            onTap: () {
+              context.router.push(const LearningRoute());
+            },
+          );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.router.push(const CardListRoute());
+        },
         child: const Icon(Icons.add),
       ),
     );
   }
 }
 
-class SetNameWidget extends StatelessWidget {
-  const SetNameWidget({super.key, required this.name});
+class SetWidget extends StatelessWidget {
+  const SetWidget({super.key, required this.name});
 
   final String name;
 

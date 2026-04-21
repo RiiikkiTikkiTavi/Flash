@@ -13,7 +13,7 @@ class LearningScreen extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () {
-            print("Close pressed");
+            context.router.pop();
           },
         ),
         title: const Text('1/11'),
