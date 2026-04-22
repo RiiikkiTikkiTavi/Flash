@@ -1,0 +1,124 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:6072819494930855596",
+      "lastPropertyId": "5:4026988062600264583",
+      "name": "CardModel",
+      "properties": [
+        {
+          "id": "1:3145251637884142579",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3230418537460070326",
+          "name": "term",
+          "type": 9
+        },
+        {
+          "id": "3:270395438197547566",
+          "name": "definition",
+          "type": 9
+        },
+        {
+          "id": "4:6521426042038217790",
+          "name": "cardSetId",
+          "indexId": "1:2000573692403215385",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "SetModel"
+        },
+        {
+          "id": "5:4026988062600264583",
+          "name": "progressId",
+          "indexId": "2:3801861997235232840",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "ProgressModel"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:6967314147818520993",
+      "lastPropertyId": "5:4454352179562550607",
+      "name": "ProgressModel",
+      "properties": [
+        {
+          "id": "1:3935078583896059743",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8982043844837268236",
+          "name": "cardId",
+          "indexId": "3:3588355757598610096",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "CardModel"
+        },
+        {
+          "id": "3:3939852133164059268",
+          "name": "stepIndex",
+          "type": 6
+        },
+        {
+          "id": "4:2523276216775558014",
+          "name": "nextReviewAt",
+          "type": 10
+        },
+        {
+          "id": "5:4454352179562550607",
+          "name": "lastReviewAt",
+          "type": 10
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:9038239325456474914",
+      "lastPropertyId": "4:7998364415268396736",
+      "name": "SetModel",
+      "properties": [
+        {
+          "id": "1:7524123339665166174",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4490374685492296429",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:7709539576502448975",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "4:7998364415268396736",
+          "name": "createdAt",
+          "type": 10
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:9038239325456474914",
+  "lastIndexId": "3:3588355757598610096",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
