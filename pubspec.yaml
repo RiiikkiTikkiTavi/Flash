@@ -35,13 +35,15 @@ dependencies:
   talker_flutter: ^5.1.16
   flutter_riverpod: ^2.0.0
   equatable: ^2.0.8
+  objectbox: ^5.3.1
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  auto_route_generator: ^10.5.0
   build_runner: 
+  auto_route_generator: ^10.5.0
+  objectbox_generator: 5.3.1
 
   flutter_lints: ^6.0.0
 
