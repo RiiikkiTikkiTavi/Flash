@@ -1,12 +1,19 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flash/domain/entities/set_entity.dart';
+import 'package:flash/features/sets/providers/set_repository_provider.dart';
+import 'package:flash/talker_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class CardListScreen extends StatelessWidget {
+class CardListScreen extends ConsumerWidget {
   const CardListScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final talker = ref.watch(talkerProvider);
+    final repository = ref.read(setRepositoryProvider);
+
     final nameController = TextEditingController();
     final descrController = TextEditingController();
     final termController = TextEditingController();
@@ -23,7 +30,20 @@ class CardListScreen extends StatelessWidget {
             actions: [
               IconButton(
                 icon: const Icon(Icons.done),
-                onPressed: () {
+                onPressed: () async {
+                  try {
+                    final newSet = SetEntity(
+                      id: 0,
+                      name: nameController.text,
+                      description: descrController.text,
+                      createdAt: DateTime.now(),
+                      cards: const [],
+                    );
+                    await repository.createSet(newSet);
+                  } catch (e) {
+                    talker.error(e.toString());
+                  }
+
                   context.router.pop();
                 },
               ),
