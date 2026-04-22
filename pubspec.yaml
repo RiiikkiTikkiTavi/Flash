@@ -28,12 +28,13 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  auto_route: ^11.1.0
   flutter:
     sdk: flutter
+  auto_route: ^11.1.0
+  cupertino_icons: ^1.0.8
+  talker_flutter: ^5.1.16
+  flutter_riverpod: ^2.0.0
 
-cupertino_icons: ^1.0.8
-auto_route: ^11.1.0
 
 dev_dependencies:
   flutter_test:

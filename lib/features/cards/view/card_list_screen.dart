@@ -71,9 +71,7 @@ class HeaderSetWidget extends StatelessWidget {
           children: [
             TextField(
               controller: nameController,
-              onChanged: (value) {
-                print("Current text: $value");
-              },
+              onChanged: (value) {},
               decoration: const InputDecoration(
                 hintText: 'Enter name of the set',
                 border: UnderlineInputBorder(),
@@ -81,9 +79,7 @@ class HeaderSetWidget extends StatelessWidget {
             ),
             TextField(
               controller: descrController,
-              onChanged: (value) {
-                print("Current text: $value");
-              },
+              onChanged: (value) {},
               decoration: const InputDecoration(
                 hintText: 'Enter description of the set',
                 border: UnderlineInputBorder(),
@@ -121,9 +117,7 @@ class CardWidget extends StatelessWidget {
         children: [
           TextField(
             controller: termController,
-            onChanged: (value) {
-              print("Current text: $value");
-            },
+            onChanged: (value) {},
             decoration: const InputDecoration(
               hintText: 'Enter term',
               border: UnderlineInputBorder(),
@@ -131,9 +125,7 @@ class CardWidget extends StatelessWidget {
           ),
           TextField(
             controller: defController,
-            onChanged: (value) {
-              print("Current text: $value");
-            },
+            onChanged: (value) {},
             decoration: const InputDecoration(
               hintText: 'Enter definition',
               border: UnderlineInputBorder(),

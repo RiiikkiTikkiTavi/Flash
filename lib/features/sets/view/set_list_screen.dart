@@ -1,13 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flash/router/router.dart';
+import 'package:flash/talker_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class SetListScreen extends StatelessWidget {
+class SetListScreen extends ConsumerWidget {
   const SetListScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final talker = ref.watch(talkerProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -22,6 +25,7 @@ class SetListScreen extends StatelessWidget {
             child: const SetWidget(name: 'Set of cards'),
             onTap: () {
               context.router.push(const LearningRoute());
+              talker.info('Переход к экрану обучения');
             },
           );
         },
@@ -29,6 +33,7 @@ class SetListScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           context.router.push(const CardListRoute());
+          talker.info('Переход к экрану карточек');
         },
         child: const Icon(Icons.add),
       ),
