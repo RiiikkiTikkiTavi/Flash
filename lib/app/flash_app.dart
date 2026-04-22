@@ -1,3 +1,4 @@
+import 'package:flash/object_box_provider.dart';
 import 'package:flash/router/router.dart';
 import 'package:flash/talker_provider.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,8 @@ class _FlashAppState extends ConsumerState<FlashApp> {
   @override
   Widget build(BuildContext context) {
     final talker = ref.watch(talkerProvider);
+    final objectBox = ref.watch(objectBoxProvider);
+
     talker.info('Главный экран загружен');
     return MaterialApp.router(routerConfig: _router.config());
   }

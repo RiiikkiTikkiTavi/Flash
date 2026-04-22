@@ -31,7 +31,7 @@ class ObjectBox {
     final dbDir = path.join(dir.path, 'flashcards');
 
     // открытие БД в папке dbDir
-    obj.store = openStore(directory: dbDir);
+    obj.store = await openStore(directory: dbDir);
 
     // получение боксов для хранения моделей
     obj.cardBox = obj.store.box<CardModel>();
