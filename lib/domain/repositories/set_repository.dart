@@ -1,0 +1,14 @@
+import 'package:flash/domain/entities/card_entity.dart';
+import 'package:flash/domain/entities/set_entity.dart';
+
+abstract class AbstractSetRepository {
+  // Базовые CRUD операции
+  Future<void> createSet(CardEntity cardSet);
+  Future<void> editSet(CardEntity cardSet);
+  Future<void> deleteSet(String id);
+  Future<SetEntity> getSet(String id);
+
+  // Операции с карточками внутри набора
+  Future<void> addCardToSet(String setId, CardEntity card);
+  Future<void> deleteCardFromSet(String setId, String cardId);
+}
