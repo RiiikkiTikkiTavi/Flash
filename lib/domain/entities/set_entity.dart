@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flash/domain/entities/card_entity.dart';
 
 class SetEntity extends Equatable {
-  final String id;
+  final int id;
   final String name;
   final String? description;
   final DateTime createdAt;

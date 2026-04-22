@@ -2,7 +2,7 @@
 import 'package:equatable/equatable.dart';
 
 class CardEntity extends Equatable {
-  final String id;
+  final int id;
   final String term;
   final String definition;
   const CardEntity({

@@ -2,11 +2,13 @@
 import 'package:equatable/equatable.dart';
 
 class CardProgressEntity extends Equatable {
-  final String cardId;
+  final int id;
+  final int cardId;
   final int stepIndex;
   final DateTime nextReviewAt;
   final DateTime lastReviewAt;
   const CardProgressEntity({
+    required this.id,
     required this.cardId,
     required this.stepIndex,
     required this.nextReviewAt,
@@ -14,5 +16,11 @@ class CardProgressEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props => [cardId, stepIndex, nextReviewAt, lastReviewAt];
+  List<Object?> get props => [
+    id,
+    cardId,
+    stepIndex,
+    nextReviewAt,
+    lastReviewAt,
+  ];
 }
