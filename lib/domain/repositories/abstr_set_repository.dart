@@ -3,7 +3,7 @@ import 'package:flash/domain/entities/set_entity.dart';
 
 abstract class AbstractSetRepository {
   // Базовые CRUD операции
-  Future<void> createSet(SetEntity set);
+  void createSet(SetEntity set);
   Future<void> editSet(SetEntity set);
   Future<void> deleteSet(String id);
   Future<SetEntity> getSet(String id);

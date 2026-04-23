@@ -34,12 +34,8 @@ class SetListScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          try {
-            context.router.push(const CardListRoute());
-            talker.info('Переход к экрану карточек');
-          } catch (e) {
-            talker.error(e.toString());
-          }
+          context.router.push(const CardListRoute());
+          talker.info('Переход к экрану карточек');
         },
         child: const Icon(Icons.add),
       ),

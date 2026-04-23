@@ -20,7 +20,7 @@ class SetRepository implements AbstractSetRepository {
   }
 
   @override
-  Future<void> createSet(SetEntity set) async {
+  int createSet(SetEntity set) {
     try {
       // преобразование entity в model
       final setModel = SetModel.fromEntity(set);
@@ -29,8 +29,10 @@ class SetRepository implements AbstractSetRepository {
       final id = _objectBox.setBox.put(setModel);
 
       _talker.info('Набор "${setModel.name}" сохранён с ID: $id');
+      return id;
     } catch (e, stackTrace) {
       _talker.handle(e, stackTrace, 'Ошибка при создании набора ${set.name}');
+      return -1;
     }
   }
 
