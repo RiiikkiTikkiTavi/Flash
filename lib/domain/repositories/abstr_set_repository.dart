@@ -5,10 +5,10 @@ abstract class AbstractSetRepository {
   // Базовые CRUD операции
   void createSet(SetEntity set);
   Future<void> editSet(SetEntity set);
-  Future<void> deleteSet(String id);
-  Future<SetEntity> getSet(String id);
+  Future<void> deleteSet(int id);
+  Future<SetEntity> getSet(int id);
 
   // Операции с карточками внутри набора
-  Future<void> addCardToSet(String setId, CardEntity card);
-  Future<void> deleteCardFromSet(String setId, String cardId);
+  Future<void> addCardToSet(int setId, CardEntity card);
+  Future<void> deleteCardFromSet(int setId, int cardId);
 }

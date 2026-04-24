@@ -4,13 +4,13 @@ import 'package:flash/domain/repositories/abstr_learning_repository.dart';
 
 class LearningRepository extends AbstractLearningRepository {
   @override
-  Future<CardEntity?> getNextCard(String cardId) {
+  Future<CardEntity?> getNextCard(int cardId) {
     // TODO: implement getNextCard
     throw UnimplementedError();
   }
 
   @override
-  Future<CardProgressEntity> updateProgress(String cardId, bool isCorrect) {
+  Future<CardProgressEntity> updateProgress(int cardId, bool isCorrect) {
     // TODO: implement updateProgress
     throw UnimplementedError();
   }

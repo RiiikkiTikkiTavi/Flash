@@ -14,13 +14,13 @@ class SetRepository implements AbstractSetRepository {
       _talker = talker;
 
   @override
-  Future<void> addCardToSet(String setId, CardEntity card) {
+  Future<void> addCardToSet(int setId, CardEntity card) {
     // TODO: implement addCardToSet
     throw UnimplementedError();
   }
 
   @override
-  int createSet(SetEntity set) {
+  Future<int> createSet(SetEntity set) async {
     try {
       // преобразование entity в model
       final setModel = SetModel.fromEntity(set);
@@ -37,13 +37,13 @@ class SetRepository implements AbstractSetRepository {
   }
 
   @override
-  Future<void> deleteCardFromSet(String setId, String cardId) {
+  Future<void> deleteCardFromSet(int setId, int cardId) {
     // TODO: implement deleteCardFromSet
     throw UnimplementedError();
   }
 
   @override
-  Future<void> deleteSet(String id) {
+  Future<void> deleteSet(int id) {
     // TODO: implement deleteSet
     throw UnimplementedError();
   }
@@ -55,7 +55,7 @@ class SetRepository implements AbstractSetRepository {
   }
 
   @override
-  Future<SetEntity> getSet(String id) {
+  Future<SetEntity> getSet(int id) {
     // TODO: implement getSet
     throw UnimplementedError();
   }

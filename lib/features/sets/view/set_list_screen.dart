@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flash/features/sets/providers/set_repository_provider.dart';
 import 'package:flash/router/router.dart';
 import 'package:flash/talker_provider.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,6 @@ class SetListScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final talker = ref.watch(talkerProvider);
-    final repository = ref.read(setRepositoryProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,

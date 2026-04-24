@@ -14,7 +14,7 @@ class CardRepository implements AbstractCardRepository {
       _talker = talker;
 
   @override
-  void createCard(CardEntity card) {
+  Future<void> createCard(CardEntity card) async {
     try {
       // преобразование entity в model
       final cardModel = CardModel.fromEntity(card);
@@ -33,7 +33,7 @@ class CardRepository implements AbstractCardRepository {
   }
 
   @override
-  Future<void> deleteCard(String id) {
+  Future<void> deleteCard(int id) {
     // TODO: implement deleteCard
     throw UnimplementedError();
   }
@@ -45,13 +45,13 @@ class CardRepository implements AbstractCardRepository {
   }
 
   @override
-  Future<CardEntity> gerCard(String id) {
+  Future<CardEntity> gerCard(int id) {
     // TODO: implement gerCard
     throw UnimplementedError();
   }
 
   @override
-  Future<CardProgressEntity> getProgress(String cardId) {
+  Future<CardProgressEntity> getProgress(int cardId) {
     // TODO: implement getProgress
     throw UnimplementedError();
   }

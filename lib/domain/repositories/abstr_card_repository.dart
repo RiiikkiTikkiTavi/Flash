@@ -5,9 +5,9 @@ abstract class AbstractCardRepository {
   // Базовые CRUD операции с карточками
   void createCard(CardEntity card);
   Future<void> editCard(CardEntity card);
-  Future<void> deleteCard(String id);
-  Future<CardEntity> gerCard(String id);
+  Future<void> deleteCard(int id);
+  Future<CardEntity> gerCard(int id);
 
   // Операции с прогрессом
-  Future<CardProgressEntity> getProgress(String cardId);
+  Future<CardProgressEntity> getProgress(int cardId);
 }
