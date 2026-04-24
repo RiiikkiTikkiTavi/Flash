@@ -59,4 +59,16 @@ class SetRepository implements AbstractSetRepository {
     // TODO: implement getSet
     throw UnimplementedError();
   }
+
+  @override
+  Future<List<SetEntity>> getAllSets() async {
+    try {
+      final setModels = _objectBox.setBox.getAll();
+      _talker.info('Получено ${setModels.length} наборов из базы данных');
+      return setModels.map((model) => model.toEntity()).toList();
+    } catch (e, stackTrace) {
+      _talker.handle(e, stackTrace, 'При получении наборов произошла ошибка');
+      return [];
+    }
+  }
 }

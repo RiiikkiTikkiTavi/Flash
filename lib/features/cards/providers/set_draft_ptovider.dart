@@ -54,10 +54,6 @@ final setDraftProvider = StateNotifierProvider<SetDraftNotifier, SetDraft?>((
   return SetDraftNotifier();
 });
 
-// Провайдер для текущего набора
-//final nameControllerProvider = Provider((ref) => TextEditingController());
-//final descrControllerProvider = Provider((ref) => TextEditingController());
-
 class SetDraftNotifier extends StateNotifier<SetDraft?> {
   SetDraftNotifier() : super(null);
 
