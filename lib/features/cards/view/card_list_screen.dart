@@ -5,7 +5,6 @@ import 'package:flash/features/cards/widgets/header_set_widget.dart';
 import 'package:flash/features/providers/card_list_provider.dart';
 import 'package:flash/features/providers/set_creation_provider.dart';
 import 'package:flash/features/providers/set_draft_ptovider.dart';
-import 'package:flash/talker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,7 +14,7 @@ class CardListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final talker = ref.read(talkerProvider);
+    //final talker = ref.read(talkerProvider);
     final cards = ref.watch(cardsListProvider);
     final set = ref.watch(setDraftProvider);
 

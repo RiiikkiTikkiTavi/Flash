@@ -30,23 +30,28 @@ class SetListScreen extends ConsumerWidget {
           talker.error('Ошибка при загрузке наборов: $e');
           return const Center(child: Text('Ошибка при загрузке наборов'));
         },
-        data: (set) {
+        data: (sets) {
           talker.info('[UI] Состояние: DATA');
-          if (set.isEmpty) {
+          if (sets.isEmpty) {
             talker.info('[UI] Нет наборов, пустое состояние');
             return const Center(child: Text('Нет доступных наборов'));
           }
-          talker.info('[UI] Отображается список из ${set.length} наборов');
+          talker.info('[UI] Отображается список из ${sets.length} наборов');
           return ListView.builder(
             padding: const EdgeInsets.all(16),
             shrinkWrap: true,
-            itemCount: set.length,
+            itemCount: sets.length,
             itemBuilder: (context, index) {
+              final set = sets[index];
               return GestureDetector(
-                child: SetWidget(name: set[index].name),
+                child: SetWidget(name: set.name),
                 onTap: () {
                   context.router.push(const LearningRoute());
                   talker.info('Переход к экрану обучения');
+                },
+                onLongPress: () {
+                  talker.info('Долгое нажатие на набор: ${set.name}');
+                  showOptionsMenu(context, ref, set.id);
                 },
               );
             },
@@ -85,4 +90,47 @@ class SetWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+void showOptionsMenu(
+  BuildContext context,
+  WidgetRef ref,
+  int setId,
+  //String setName,
+) {
+  showModalBottomSheet(
+    context: context,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    ),
+    builder: (context) {
+      return SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 4,
+              width: 40,
+              margin: const EdgeInsets.symmetric(vertical: 12),
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.edit, color: Colors.blue),
+              title: const Text('Редактировать'),
+              onTap: () {}, //=> _onEditSet(context, ref, setId, setName),
+            ),
+            ListTile(
+              leading: const Icon(Icons.delete, color: Colors.red),
+              title: const Text('Удалить'),
+              onTap: () {}, //=> _onDeleteSet(context, ref, setId, setName),
+            ),
+            const SizedBox(height: 8),
+          ],
+        ),
+      );
+    },
+  );
 }
