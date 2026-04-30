@@ -4,7 +4,7 @@ import 'package:flash/domain/entities/card_entity.dart';
 import 'package:flash/domain/entities/set_entity.dart';
 import 'package:flash/features/providers/card_repository_provider.dart';
 import 'package:flash/features/providers/set_draft_ptovider.dart';
-import 'package:flash/features/providers/set_repository_provider.dart';
+import 'package:flash/features/providers/set_list_provider.dart';
 import 'package:flash/talker_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -55,7 +55,7 @@ class SetCreationNotifier extends Notifier<bool> {
       state = true;
       return true;
     } catch (e, stackTrace) {
-      talker.error(e.toString());
+      talker.handle(e, stackTrace, 'Ошибка при создании набора ${set.name}');
       // состояние - ошибка
       state = false;
       return false;

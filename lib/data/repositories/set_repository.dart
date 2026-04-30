@@ -28,7 +28,7 @@ class SetRepository implements AbstractSetRepository {
       // сохранение в базу данных
       final id = _objectBox.setBox.put(setModel);
 
-      _talker.info('Набор "${setModel.name}" сохранён с ID: $id');
+      _talker.info('[БД] Набор "${setModel.name}" сохранён с ID: $id');
       return id;
     } catch (e, stackTrace) {
       _talker.handle(e, stackTrace, 'Ошибка при создании набора ${set.name}');
@@ -64,7 +64,7 @@ class SetRepository implements AbstractSetRepository {
   Future<List<SetEntity>> getAllSets() async {
     try {
       final setModels = _objectBox.setBox.getAll();
-      _talker.info('Получено ${setModels.length} наборов из базы данных');
+      _talker.info('[БД] Получено ${setModels.length} наборов из базы данных');
       return setModels.map((model) => model.toEntity()).toList();
     } catch (e, stackTrace) {
       _talker.handle(e, stackTrace, 'При получении наборов произошла ошибка');

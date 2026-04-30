@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flash/features/providers/set_repository_provider.dart';
+import 'package:flash/features/providers/set_list_provider.dart';
 import 'package:flash/router/router.dart';
 import 'package:flash/talker_provider.dart';
 import 'package:flutter/material.dart';
@@ -15,21 +15,28 @@ class SetListScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final talker = ref.watch(talkerProvider);
-    final setListRepository = ref.watch(setListProvider);
+    final setsNotifier = ref.watch(setListNotifierProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Flashcards'),
       ),
-      body: setListRepository.when(
+      body: setsNotifier.when(
+        loading: () {
+          talker.info('[UI] Состояние: загрузка. Идет загрузка наборов');
+          return const Center(child: CircularProgressIndicator());
+        },
         error: (e, st) {
           talker.error('Ошибка при загрузке наборов: $e');
           return const Center(child: Text('Ошибка при загрузке наборов'));
         },
         data: (set) {
+          talker.info('[UI] Состояние: DATA');
           if (set.isEmpty) {
+            talker.info('[UI] Нет наборов, пустое состояние');
             return const Center(child: Text('Нет доступных наборов'));
           }
+          talker.info('[UI] Отображается список из ${set.length} наборов');
           return ListView.builder(
             padding: const EdgeInsets.all(16),
             shrinkWrap: true,
@@ -45,13 +52,15 @@ class SetListScreen extends ConsumerWidget {
             },
           );
         },
-        loading: () => const Center(child: CircularProgressIndicator()),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.router.push(const CardListRoute());
+        onPressed: () async {
+          final result = await context.router.push(const CardListRoute());
+          if (result == true) {
+            final notifier = ref.read(setListNotifierProvider.notifier);
+            await notifier.refresh();
+          }
           talker.info('Переход к экрану карточек');
-          ref.invalidate(setListProvider);
         },
         child: const Icon(Icons.add),
       ),
