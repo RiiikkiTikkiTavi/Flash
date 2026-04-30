@@ -1,4 +1,4 @@
-import 'package:flash/features/cards/providers/set_draft_ptovider.dart';
+import 'package:flash/features/providers/set_draft_ptovider.dart';
 import 'package:flash/talker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

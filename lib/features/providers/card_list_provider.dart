@@ -1,6 +1,7 @@
 import 'package:flash/domain/entities/card_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// шаблон карточки
 class CardDraft {
   final String term;
   final String definition;

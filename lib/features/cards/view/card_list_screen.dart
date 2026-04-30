@@ -1,13 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
-import 'package:flash/domain/entities/card_entity.dart';
-import 'package:flash/domain/entities/set_entity.dart';
-import 'package:flash/features/cards/providers/card_list_provider.dart';
-import 'package:flash/features/cards/providers/set_draft_ptovider.dart';
 import 'package:flash/features/cards/widgets/cards_widget.dart';
 import 'package:flash/features/cards/widgets/header_set_widget.dart';
-import 'package:flash/features/sets/providers/card_repository_provider.dart';
-import 'package:flash/features/sets/providers/set_repository_provider.dart';
+import 'package:flash/features/providers/card_list_provider.dart';
+import 'package:flash/features/providers/set_creation_provider.dart';
+import 'package:flash/features/providers/set_draft_ptovider.dart';
 import 'package:flash/talker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,43 +16,15 @@ class CardListScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final talker = ref.read(talkerProvider);
-    final setRepository = ref.read(setRepositoryProvider);
-    final cardRepository = ref.read(cardRepositoryProvider);
-
     final cards = ref.watch(cardsListProvider);
     final set = ref.watch(setDraftProvider);
 
     Future<void> saveSet() async {
-      if (set == null || !set.isValid) {
-        talker.warning(
-          'Невозможно сохранить набор: не все поля заполнены или недостаточно карточек',
-        );
-        return;
-      }
-      try {
-        final newSet = SetEntity(
-          id: 0,
-          name: set.name,
-          description: set.description,
-          createdAt: set.createdAt,
-          cards: set.cards.map((card) => card.toEntity()).toList(),
-        );
-        final setId = await setRepository.createSet(newSet);
-        for (var card in set.cards) {
-          await cardRepository.createCard(
-            CardEntity(id: 0, term: card.term, definition: card.definition),
-          );
-        }
-        if (context.mounted) {
-          context.router.pop();
-        }
-      } catch (e) {
-        talker.error(e.toString());
-        if (context.mounted) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text('Ошибка: $e')));
-        }
+      final notifier = ref.read(setCreationNotifierProvider.notifier);
+      bool result = await notifier.saveSet(set!);
+      if (result && context.mounted) {
+        ref.read(setDraftProvider.notifier).reset();
+        context.router.pop();
       }
     }
 
@@ -68,6 +37,15 @@ class CardListScreen extends ConsumerWidget {
             title: const Text('Набор карточек'),
             elevation: 0,
             surfaceTintColor: Colors.transparent,
+            leading: IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const CloseDialogWidget(),
+                );
+              },
+              icon: const Icon(Icons.arrow_back),
+            ),
             actions: [
               IconButton(
                 icon: const Icon(Icons.done),
@@ -106,6 +84,34 @@ class CardListScreen extends ConsumerWidget {
         },
         child: const Icon(Icons.add),
       ),
+    );
+  }
+}
+
+class CloseDialogWidget extends StatelessWidget {
+  const CloseDialogWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Отмена создания'),
+      content: const Text(
+        'Вы уверены, что хотите выйти? Все изменения будут потеряны.',
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(false),
+          child: const Text('Нет'),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop(true);
+            context.router.pop();
+          },
+          style: TextButton.styleFrom(foregroundColor: Colors.red),
+          child: const Text('Да, выйти'),
+        ),
+      ],
     );
   }
 }

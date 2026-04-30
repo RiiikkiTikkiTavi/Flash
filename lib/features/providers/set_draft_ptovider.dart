@@ -1,4 +1,4 @@
-import 'package:flash/features/cards/providers/card_list_provider.dart';
+import 'package:flash/features/providers/card_list_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Черновик набора
@@ -16,8 +16,18 @@ class SetDraft {
 
   bool get isNameValid => name.trim().isNotEmpty;
   bool get hasMinCards => cards.length >= 2;
+  bool get areAllCardsValid => cards.every((card) => card.isValid);
 
-  bool get isValid => isNameValid && hasMinCards;
+  bool get isValid => isNameValid && hasMinCards && areAllCardsValid;
+
+  factory SetDraft.empty() {
+    return SetDraft(
+      name: '',
+      description: null,
+      createdAt: DateTime.now(),
+      cards: [],
+    );
+  }
 
   SetDraft copyWithName(String newName) {
     return SetDraft(
@@ -56,6 +66,10 @@ final setDraftProvider = StateNotifierProvider<SetDraftNotifier, SetDraft?>((
 
 class SetDraftNotifier extends StateNotifier<SetDraft?> {
   SetDraftNotifier() : super(null);
+
+  void reset() {
+    state = SetDraft.empty();
+  }
 
   void updateName(String name) {
     if (name.trim().isNotEmpty) {
