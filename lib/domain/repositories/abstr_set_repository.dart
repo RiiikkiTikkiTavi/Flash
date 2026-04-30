@@ -5,7 +5,7 @@ abstract class AbstractSetRepository {
   // Базовые CRUD операции
   Future<void> createSet(SetEntity set);
   Future<void> editSet(SetEntity set);
-  Future<void> deleteSet(int id);
+  Future<bool> deleteSet(int id);
   Future<SetEntity> getSet(int id);
 
   Future<List<SetEntity>> getAllSets();

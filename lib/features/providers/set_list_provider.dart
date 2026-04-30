@@ -46,4 +46,22 @@ class SetListNotifier extends StateNotifier<AsyncValue<List<SetEntity>>> {
   Future<void> refresh() async {
     await loadSets();
   }
+
+  Future<bool> deleteSet(int id) async {
+    try {
+      final repository = ref.read(setRepositoryProvider);
+      final talker = ref.read(talkerProvider);
+
+      final result = await repository.deleteSet(id);
+      if (result) {
+        talker.info('[Провайдер] набор $id удален');
+        await refresh();
+        return true;
+      }
+      return false;
+    } catch (e, st) {
+      ref.read(talkerProvider).handle(e, st, '[Провайдер] Ошибка удаления: $e');
+      return false;
+    }
+  }
 }

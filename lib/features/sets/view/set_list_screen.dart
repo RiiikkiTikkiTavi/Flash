@@ -50,7 +50,7 @@ class SetListScreen extends ConsumerWidget {
                   talker.info('Переход к экрану обучения');
                 },
                 onLongPress: () {
-                  talker.info('Долгое нажатие на набор: ${set.name}');
+                  talker.info('[UI] Долгое нажатие на набор: ${set.name}');
                   showOptionsMenu(context, ref, set.id);
                 },
               );
@@ -125,7 +125,7 @@ void showOptionsMenu(
             ListTile(
               leading: const Icon(Icons.delete, color: Colors.red),
               title: const Text('Удалить'),
-              onTap: () {}, //=> _onDeleteSet(context, ref, setId, setName),
+              onTap: () => onDelete(context, ref, setId),
             ),
             const SizedBox(height: 8),
           ],
@@ -133,4 +133,18 @@ void showOptionsMenu(
       );
     },
   );
+}
+
+void onDelete(BuildContext context, WidgetRef ref, int setId) async {
+  final talker = ref.watch(talkerProvider);
+  final notifier = ref.read(setListNotifierProvider.notifier);
+
+  final result = await notifier.deleteSet(setId);
+  if (result && context.mounted) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Набор удален')));
+    talker.info('[UI] Набор $setId удален');
+    Navigator.of(context).pop(true);
+  }
 }

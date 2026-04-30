@@ -43,9 +43,19 @@ class SetRepository implements AbstractSetRepository {
   }
 
   @override
-  Future<void> deleteSet(int id) {
-    // TODO: implement deleteSet
-    throw UnimplementedError();
+  Future<bool> deleteSet(int id) async {
+    try {
+      //final set = _objectBox.setBox.get(id);
+
+      // удаление набора из базы данных
+      _objectBox.setBox.remove(id);
+
+      _talker.info('[БД] Набор с ID: $id удален');
+      return true;
+    } catch (e, stackTrace) {
+      _talker.handle(e, stackTrace, '[БД] Ошибка при удалении набора $id');
+      return false;
+    }
   }
 
   @override

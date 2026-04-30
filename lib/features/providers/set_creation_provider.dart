@@ -62,7 +62,7 @@ class SetCreationNotifier extends Notifier<bool> {
     }
   }
 
-  void reset() {
-    state = false; // Сбрасываем перед новым использованием
-  }
+  // void reset() {
+  //   state = false; // Сбрасываем перед новым использованием
+  // }
 }
